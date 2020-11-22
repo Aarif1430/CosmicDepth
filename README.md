@@ -1,6 +1,6 @@
 # Documentation CosmicDepth Hackathon App
 
-This web app is a sample project built using Python 3 and the Flask microframework. The intent is to create a simple-to-use web application that can upload size-restricted csv only files to a database, allow the user to view the names of stored csv files, and download as needed. It has been designed with employees who do not regularly write code but work with data through a graphic user interface in mind. 
+A flask hackathon management application with registration and leaderboard. 
 
 ## GETTING STARTED
 
@@ -65,3 +65,5 @@ you can see the tables and schema with the following commands:
 For a quick query, you can run the following:
 
 `select * from csv_file where record_id=1;`
+
+
