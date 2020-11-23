@@ -44,3 +44,13 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+
+
+class CsvFile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True)
+    data = db.Column(db.Integer)
+
+    def __init__(self, name, data):
+        self.name = name
+        self.data = data

@@ -2,14 +2,21 @@
 
 {% block content %}
 
-  <h4>Select a csv file from your computer</h4>
-  <form action="upload" method="POST" enctype="multipart/form-data">
+<div class="row" style="margin-top: 4rem">
+  <h2 style="margin-bottom: 3rem">CSV (Text) file uploader!</h2>
+<hr />
+<div class="container">
+  <form action="{{ url_for('posts.upload') }}" method="POST" enctype="multipart/form-data">
     <div class="form-inline">
       <div class="form-group">
         <input type="file" name="file">
+
       </div>
       <button type="submit" value ="Upload" class="btn btn-sm btn-primary">Upload csv file</button>
+
     </div>
   </form>
-
+    </div>
+  </div>
+  <hr />
 {% endblock content%}
