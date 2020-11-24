@@ -9,5 +9,5 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = S3Connection(os.environ['EMAIL'])
-    MAIL_PASSWORD = S3Connection(os.environ['PWD'])#os.environ.get('EMAIL_PASS')
+    MAIL_USERNAME = os.environ.get('EMAIL')
+    MAIL_PASSWORD = os.environ.get('PWD')#os.environ.get('EMAIL_PASS')
