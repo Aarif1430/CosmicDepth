@@ -17,3 +17,5 @@ six==1.11.0
 SQLAlchemy==1.2.7
 Werkzeug==0.14.1
 WTForms==2.1
+MarkupSafe==0.23
+
