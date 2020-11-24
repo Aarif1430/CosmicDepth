@@ -8,4 +8,4 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = 'cosmicdepth1729@gmail.com'
-    MAIL_PASSWORD = 'cosmicdepth$1729'#os.environ.get('EMAIL_PASS')
+    MAIL_PASSWORD = 'cosmicdeptH$1729'#os.environ.get('EMAIL_PASS')
