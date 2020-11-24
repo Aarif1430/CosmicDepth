@@ -1,1 +1,1 @@
-web: gunicorn app:cosmicdepth --limit-request-line=20924
+web: gunicorn cosmicdepth:app --limit-request-line=20924
