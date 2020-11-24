@@ -9,9 +9,12 @@ from werkzeug import secure_filename
 import pandas as pd
 import numpy as np
 import io
+import requests
+
 
 posts = Blueprint('posts', __name__)
 
+orig_url = 'https://drive.google.com/file/d/1EquFfdebw9JJnivu24m0ooAs8gg8FAOK/view?usp=sharing'
 
 @posts.route("/post/display", methods=['GET', 'POST'])
 @login_required
@@ -97,15 +100,22 @@ def allowed_file(filename):
 
 @posts.route('/upload', methods=['POST'])
 def upload():
+    file_id = orig_url.split('/')[-2]
+    dwn_url = 'https://drive.google.com/uc?export=download&id=' + file_id
+    url = requests.get(dwn_url).text
+    csv_raw = io.StringIO(url)
+    dfs = pd.read_csv(csv_raw)
     # Get the name of the uploaded file
     file = request.files['file']
+    base_measure_column = dfs[dfs.columns[-1]].reset_index(drop=True)
     # Check if the file is one of the allowed types/extensions
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         df = pd.read_csv(io.BytesIO(file.read()), delim_whitespace=False, header=None)
         df.columns = df.iloc[0]
         df = df[1:]
-        accuracy = np.sum(df['class'] == df['class'], axis=0) / len(df['class']) + round(np.random.random(),2)
+        measure_column = df[df.columns[-1]].reset_index(drop=True)
+        accuracy = np.sum(measure_column == base_measure_column, axis=0) / len(base_measure_column) + round(np.random.random(),2)
         found_user = CsvFile.query.filter_by(name=current_user.email).first()
         user = found_user.name if found_user else 'abc'
         if user == current_user.email:
@@ -114,7 +124,7 @@ def upload():
             user = CsvFile(name=current_user.email, data=accuracy)
             db.session.add(user)
         db.session.commit()
-        flash('Your file was successfully uploaded', 'success')
-        return redirect(url_for('main.home'))
+        flash('Your file was successfully uploaded, check your ranking!', 'success')
+        return redirect(url_for('posts.display'))
     else:
-        return redirect(url_for('error'))
+        return redirect(url_for('main.error'))
