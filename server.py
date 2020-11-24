@@ -1,6 +1,6 @@
-from cosmicdepth import create_app
+from cosmicdepth import app
 
-app = create_app()
+# app = create_app()
 
 
 app.run(debug=False)
