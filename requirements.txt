@@ -21,5 +21,7 @@ WTForms==2.1
 MarkupSafe==0.23
 pandas==1.1.1
 numpy==1.16.0
+requests==2.24.0
+
 
 
